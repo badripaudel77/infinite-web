@@ -6,9 +6,12 @@ import {baseAPIURL} from './util.js';
 
 document.addEventListener('DOMContentLoaded', fetchAndRenderPosts);
 
-// async call
+/**
+ * This will make HTTP call to our given endpoint, and fetch the data from server,
+ * Map each data, modify if required and finally render to the UI
+ */
 async function fetchAndRenderPosts() {    
-    const response = await fetch(`${baseAPIURL}`, {
+    const response = await fetch(baseAPIURL, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
