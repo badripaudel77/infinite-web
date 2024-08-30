@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Posts Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/project/styles/styles.css">
+</head>
+<body>
+    <div class="posts-container">
+        <h2> Posts Manager</h2>
+        <form id="post-form">
+            <input type="hidden" id="post-id" name="post-id">
+            <input type="text" id="post-input" placeholder="Enter a new post title">
+            <button type="button" id="add-post-button">Add Post</button>
+        </form>
+        <div id="input-error" style="display: none;">
+            <span>________________ Enter post title ________________</span>
+        </div>
+        <div id="loader" style="display: none;">Loading ...</div>
+        
+        <ul id="posts-list"></ul>
+    </div>
+
+    <div class="saved-posts-container">
+        <h4> Your saved posts will appear here</h4>
+        <hr>
+        <ul id="saved-posts"></ul>
+    </div>
+
+    <!-- Load the JS files. -->
+    <script src="/project/javascript/app.js" type="module" defer></script>
+</body>
+</html>
