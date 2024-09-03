@@ -9,7 +9,7 @@ export const renderPosts = (posts) => {
     const postsSection = document.getElementById('posts-list');
     posts.forEach(post => {
         const liElement = createElement(post);
-        console.log(liElement);
+        //console.log(liElement);
         postsSection.appendChild(liElement);
     });
 }
@@ -23,13 +23,37 @@ export function createElement(post) {
     li.innerHTML = `
      <p style="max-width: 400px;">${post.title}</p>
      <div class="button-group">
-            <button type="button" id="edit-post-btn" class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
-            <button type="button" id="mark-post-btn" class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
-            <button type="button" id="delete-post-btn" class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
+            <button type="button"  class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
+            <button type="button"  class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
+            <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
     </div>
     `;
-    // attach event listeners ...
+    li.addEventListener('click', e => {
+        const target = e.target.closest('button');
+        if(target.className === 'delete-post-btn') {
+            deletePost(li);
+        }
+
+        if(target.className === 'edit-post-btn') {
+        }
+        if(target.className === 'mark-post-btn') {
+        }
+    });
     return li;
+}
+
+async function deletePost(element) {
+    const postIdToDelete = element.dataset.id;
+    const response = await fetch(`${baseAPIURL}/${postIdToDelete}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+     }  
+    );
+    if(response.status === 200) {
+        element.remove();
+    }
 }
 
 export const showOrHideElement = (element, show = false, innerText = 'In Progress') => {

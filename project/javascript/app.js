@@ -10,12 +10,13 @@ document.addEventListener('DOMContentLoaded', fetchAndRenderPosts);
 
 const loaderElement = document.getElementById('loader');
 
-document.getElementById('add-post-button').addEventListener('click', addPost);
+document.getElementById('add-post-button').addEventListener('click', submitPost);
 /**
  * This will make HTTP call to our given endpoint, and fetch the data from server,
  * Map each data, modify if required and finally render to the UI
  */
-async function fetchAndRenderPosts() { 
+async function fetchAndRenderPosts(event) { 
+    //console.log('event ', event);
     showOrHideElement(loaderElement, true, 'Fetching Posts From Server');
     const posts = await fetchPosts(6);
     showOrHideElement(loaderElement, false, 'Fetching Posts From Server');
@@ -33,11 +34,19 @@ async function fetchPosts(postsLimit = 5) {
     loaderElement.style.display = 'none';
     const limitedPosts = posts.slice(0, postsLimit);
     // Filtering post with title = "qui est esse" ()
+    // Functional programming / Declartive programming
     const filteredPosts = limitedPosts.filter(post => post.title !== "qui est esse");
+    // Imperative programming
+    // const fp = [];
+    // for(const post of limitedPosts) {
+    //     if(post.title !== "qui est esse") {
+    //         fp.push(post);
+    //     }
+    // }
     return filteredPosts;
 }
 
-async function addPost () {
+async function submitPost () {
     const postTitle = document.getElementById('post-input').value;
 
     if(postTitle.trim().length < 1) {
@@ -48,22 +57,25 @@ async function addPost () {
         title: postTitle
     }
     document.getElementById('input-error').style.display = 'none';
+    await addPost(postToAdd);
+}
 
-    // make http call
-    showOrHideElement(loaderElement, true, 'Adding Post');
-    const response = await fetch(baseAPIURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postToAdd)
-     }  
-    );
-    const addedPost = await response.json();
-    // postToAdd.id = addedPost.id;
-    const addedelement = createElement(addedPost);
-    const postsSection = document.getElementById('posts-list');
-    postsSection.prepend(addedelement);
-    showOrHideElement(loaderElement, false);
-    resetValues();
+async function addPost(postToAdd) {
+      // make http call
+      showOrHideElement(loaderElement, true, 'Adding Post');
+      const response = await fetch(baseAPIURL, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postToAdd)
+       }  
+      );
+      const addedPost = await response.json();
+      // postToAdd.id = addedPost.id;
+      const addedelement = createElement(addedPost);
+      const postsSection = document.getElementById('posts-list');
+      postsSection.prepend(addedelement);
+      showOrHideElement(loaderElement, false);
+      resetValues();
 }
