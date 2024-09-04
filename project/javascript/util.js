@@ -3,6 +3,8 @@
  */
 "use strict";
 
+import { Post } from './Post.js';
+
 export const baseAPIURL = 'https://jsonplaceholder.typicode.com/posts';
 
 export const renderPosts = (posts) => {
@@ -33,16 +35,19 @@ export function createElement(post) {
         if(target.className === 'delete-post-btn') {
             deletePost(li);
         }
+        if(target.className === 'mark-post-btn') {
+            markPostAsRead(li);
+        }
 
         if(target.className === 'edit-post-btn') {
-        }
-        if(target.className === 'mark-post-btn') {
+
         }
     });
     return li;
 }
 
 async function deletePost(element) {
+    showOrHideElement(document.getElementById('loader'), true, 'Deleting in progress');
     const postIdToDelete = element.dataset.id;
     const response = await fetch(`${baseAPIURL}/${postIdToDelete}`, {
         method: 'DELETE',
@@ -53,7 +58,36 @@ async function deletePost(element) {
     );
     if(response.status === 200) {
         element.remove();
+        showOrHideElement(document.getElementById('loader'), true, 'Deleting in progress');
     }
+}
+
+function markPostAsRead(element) {
+    element.style.backgroundColor = 'gray';
+    element.style.textDecoration = 'line-through';
+    const id = element.dataset.id;
+    const title = element.innerText;
+    // const postToSave = {
+    //     id: id,
+    //     title: title
+    // };
+    const postToSave = new Post(id, title);
+    const existingPost = localStorage.getItem(id);
+    if(!existingPost) {
+        localStorage.setItem(id, JSON.stringify(postToSave));
+        // updateUI
+        retrieveSavedPosts()
+    }
+}
+
+function retrieveSavedPosts() {
+    const local = {...localStorage};
+    const savedPosts = [];
+    for(let key in local) {
+        // console.log(key, JSON.parse(local[key]));
+        savedPosts.push(JSON.parse(local[key]));
+    }
+    console.log(savedPosts);
 }
 
 export const showOrHideElement = (element, show = false, innerText = 'In Progress') => {
