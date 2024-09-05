@@ -43,19 +43,24 @@ export function createElement(post, isLocal = false) {
     }
     li.addEventListener('click', e => {
         const target = e.target.closest('button');
-        if(target?.className === 'delete-post-btn') {
-            deletePost(li);
-        }
         if(!isLocal) {
-            if(target?.className === 'mark-post-btn') {
-                markPostAsRead(li);
+            if(target?.className === 'delete-post-btn') {
+                deletePost(li);
             }
-    
+            if(target?.className === 'mark-post-btn') {
+                    markPostAsRead(li);
+            }
+        
             if(target?.className === 'edit-post-btn') {
-    
+        
             }
         }
-    });
+
+        if(isLocal) {
+            // TODO
+        }
+    }
+    );
     return li;
 }
 
