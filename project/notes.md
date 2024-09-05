@@ -39,7 +39,19 @@ ________________________________________________________________________________
 - HTTP : DELETE request
 - Attaching event listeners to element created dynamically.
 - Remove element from DOM (.remove() method)
-- .closest() method
+- .closest() 
+
+### Day 4
+- Localstorage
+- Parsing and Stringifying Values in Localstorage
+- Project continued with Localstorage implemented (Posts saved to localstorage and retrieved from it)
+
+
+#### Day 5
+- Continue with render saved posts in UI along with conditional rendering and reusable function.
+- Attach event listerners.
+- Locastorage Event listener
+- Class work (Delte Selected Post from Localstorage, update UI)
 
 ### URL 
 (FOR PERSONAL REFERENCE USE)

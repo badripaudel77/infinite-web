@@ -1,7 +1,7 @@
 export class Post {
     constructor(postId, postTitle) {
         this.id = postId;
-        this.postTitle = postTitle;
+        this.title = postTitle;
     }
 
     getId() {

@@ -4,7 +4,8 @@
  */
 "use strict";
 
-import {baseAPIURL, createElement, renderPosts, showOrHideElement, resetValues } from './util.js';
+import {baseAPIURL, createElement, renderPosts, 
+    showOrHideElement, resetValues, retrieveAndRenderSavedPosts } from './util.js';
 
 document.addEventListener('DOMContentLoaded', fetchAndRenderPosts);
 
@@ -21,6 +22,7 @@ async function fetchAndRenderPosts(event) {
     const posts = await fetchPosts(6);
     showOrHideElement(loaderElement, false, 'Fetching Posts From Server');
     renderPosts(posts);
+    retrieveAndRenderSavedPosts();
 }
 
 async function fetchPosts(postsLimit = 5) {

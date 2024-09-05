@@ -7,7 +7,7 @@ import { Post } from './Post.js';
 
 export const baseAPIURL = 'https://jsonplaceholder.typicode.com/posts';
 
-export const renderPosts = (posts) => {
+export const renderPosts = (posts) => {    
     const postsSection = document.getElementById('posts-list');
     posts.forEach(post => {
         const liElement = createElement(post);
@@ -17,33 +17,56 @@ export const renderPosts = (posts) => {
 }
 
 // Create <li> tag for each el
-export function createElement(post) {
+export function createElement(post, isLocal = false) {
     const li = document.createElement('li');
     li.className = 'post-item';
     li.dataset.id = post.id;
     // li.innerText = post.title;
-    li.innerHTML = `
-     <p style="max-width: 400px;">${post.title}</p>
-     <div class="button-group">
-            <button type="button"  class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
-            <button type="button"  class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
-            <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
-    </div>
+    if(!isLocal) {
+        li.innerHTML = `
+        <p style="max-width: 400px;">${post.title}</p>
+        <div class="button-group">
+                <button type="button"  class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
+                <button type="button"  class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
+                <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
+        </div>
     `;
+    }
+
+    if(isLocal) {
+        li.innerHTML = `
+        <p style="max-width: 400px;">${post.title}</p>
+        <div class="button-group">
+                <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
+        </div>
+    `;
+    }
     li.addEventListener('click', e => {
         const target = e.target.closest('button');
-        if(target.className === 'delete-post-btn') {
+        if(target?.className === 'delete-post-btn') {
             deletePost(li);
         }
-        if(target.className === 'mark-post-btn') {
-            markPostAsRead(li);
-        }
-
-        if(target.className === 'edit-post-btn') {
-
+        if(!isLocal) {
+            if(target?.className === 'mark-post-btn') {
+                markPostAsRead(li);
+            }
+    
+            if(target?.className === 'edit-post-btn') {
+    
+            }
         }
     });
     return li;
+}
+
+export const renderSavedPosts = (posts) => {
+    const postsSection = document.getElementById('saved-posts');
+    postsSection.innerHTML = '';
+    posts.forEach(post => {
+        const liElement = createElement(post, true);
+        //console.log(liElement);
+        postsSection.appendChild(liElement);
+    });
 }
 
 async function deletePost(element) {
@@ -71,24 +94,25 @@ function markPostAsRead(element) {
     //     id: id,
     //     title: title
     // };
+
+    const allSavedPosts = JSON.parse(localStorage.getItem('mySavedPosts')) || [];
     const postToSave = new Post(id, title);
-    const existingPost = localStorage.getItem(id);
+    // const allPosts = [...allSavedPosts, postToSave];
+    const existingPost = allSavedPosts.find((post) => post.id === postToSave.id);
     if(!existingPost) {
-        localStorage.setItem(id, JSON.stringify(postToSave));
-        // updateUI
-        retrieveSavedPosts()
+        allSavedPosts.push(postToSave);
+        localStorage.removeItem("mySavedPosts");
+        localStorage.setItem("mySavedPosts", JSON.stringify(allSavedPosts));
+        retrieveAndRenderSavedPosts()
     }
 }
 
-function retrieveSavedPosts() {
-    const local = {...localStorage};
-    const savedPosts = [];
-    for(let key in local) {
-        // console.log(key, JSON.parse(local[key]));
-        savedPosts.push(JSON.parse(local[key]));
-    }
-    console.log(savedPosts);
+export function retrieveAndRenderSavedPosts() {
+    const savedPosts = JSON.parse(localStorage.getItem('mySavedPosts')) || [];
+    // render saved posts to UI
+    renderSavedPosts(savedPosts, true);
 }
+
 
 export const showOrHideElement = (element, show = false, innerText = 'In Progress') => {
     if(show) {
