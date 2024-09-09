@@ -1,10 +1,10 @@
 # Reference sites
-1. https://developer.mozilla.org   (Official documenatation)
+1. https://developer.mozilla.org   (Official documentation)
         - https://developer.mozilla.org/en-US/docs/Web/HTML (HTML)
         - https://developer.mozilla.org/en-US/docs/Web/CSS
         - https://developer.mozilla.org/en-US/docs/Web/JavaScript (Javascript)
 
-2. https://www.w3schools.com/Js/ (Good for individual HTML, CSS, JS conepts)
+2. https://www.w3schools.com/Js/ (Good for individual HTML, CSS, JS concepts)
 3. https://www.javascripttutorial.net/
 4. https://javascript.info/
 
@@ -47,21 +47,26 @@ ________________________________________________________________________________
 - Project continued with Localstorage implemented (Posts saved to localstorage and retrieved from it)
 
 
-#### Day 5
+### Day 5
 - Continue with render saved posts in UI along with conditional rendering and reusable function.
-- Attach event listerners.
-- Locastorage Event listener
-- Class work (Delte Selected Post from Localstorage, update UI)
+- Attach event listerners(Additional examples)
+- Spread operator (... operator)
+- Class work (Delete Selected Post from Localstorage, update UI)
+
+### Day 6
+- Complete Remove Saved Post From UI
+- Map operator to manipulate array items (saved posts in our project)
+- Storage Event Listener
+- Start Updating Post (Prepopulate, dynamic text change for the button).
+
+### Day 7
+- TBD
+
+### Day 8: 
+- TBD
+- Github Hook (How to modify and display our custom message)
 
 ### URL 
-(FOR PERSONAL REFERENCE USE)
-Button group classes with name (to match css styling)
-
-### TODO attach event listerners as functionality
-liElement.addEventListener('click', (event) => {
-        const target = event?.target?.closest('button'); 
-        target?.classList.contains('mark-post-btn')) ....
-});
 
 ### Retrieve element by data-id={someID}
 const updatedElement = document.querySelector(`[data-id="${postId}"]`);

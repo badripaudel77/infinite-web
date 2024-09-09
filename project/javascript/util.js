@@ -6,12 +6,12 @@
 import { Post } from './Post.js';
 
 export const baseAPIURL = 'https://jsonplaceholder.typicode.com/posts';
+export let isEditMode = false;
 
 export const renderPosts = (posts) => {    
     const postsSection = document.getElementById('posts-list');
     posts.forEach(post => {
         const liElement = createElement(post);
-        //console.log(liElement);
         postsSection.appendChild(liElement);
     });
 }
@@ -32,7 +32,6 @@ export function createElement(post, isLocal = false) {
         </div>
     `;
     }
-
     if(isLocal) {
         li.innerHTML = `
         <p style="max-width: 400px;">${post.title}</p>
@@ -52,12 +51,12 @@ export function createElement(post, isLocal = false) {
             }
         
             if(target?.className === 'edit-post-btn') {
-        
+                editPost(li);
             }
         }
-
+        // Delete From Local storage
         if(isLocal) {
-            // TODO
+            deleteFromLocalstorage(li);
         }
     }
     );
@@ -69,9 +68,17 @@ export const renderSavedPosts = (posts) => {
     postsSection.innerHTML = '';
     posts.forEach(post => {
         const liElement = createElement(post, true);
-        //console.log(liElement);
         postsSection.appendChild(liElement);
     });
+}
+
+function editPost(element) {
+    const postId = element.dataset.id;
+    const postTitle = element.innerText;
+    isEditMode = true;
+    console.log(postTitle, postId)
+    document.getElementById('post-input').value = postTitle;
+    changeButtonText(isEditMode);
 }
 
 async function deletePost(element) {
@@ -86,7 +93,7 @@ async function deletePost(element) {
     );
     if(response.status === 200) {
         element.remove();
-        showOrHideElement(document.getElementById('loader'), true, 'Deleting in progress');
+        showOrHideElement(document.getElementById('loader'), false, 'Deleting in progress');
     }
 }
 
@@ -99,25 +106,44 @@ function markPostAsRead(element) {
     //     id: id,
     //     title: title
     // };
-
-    const allSavedPosts = JSON.parse(localStorage.getItem('mySavedPosts')) || [];
+    const allSavedPosts = getAllSavedPostsFromLocalstorage();
     const postToSave = new Post(id, title);
-    // const allPosts = [...allSavedPosts, postToSave];
     const existingPost = allSavedPosts.find((post) => post.id === postToSave.id);
     if(!existingPost) {
-        allSavedPosts.push(postToSave);
+        const allPosts = [...allSavedPosts, postToSave];
         localStorage.removeItem("mySavedPosts");
-        localStorage.setItem("mySavedPosts", JSON.stringify(allSavedPosts));
-        retrieveAndRenderSavedPosts()
+        localStorage.setItem("mySavedPosts", JSON.stringify(allPosts));
+        retrieveAndRenderSavedPosts(allPosts)
     }
 }
 
 export function retrieveAndRenderSavedPosts() {
-    const savedPosts = JSON.parse(localStorage.getItem('mySavedPosts')) || [];
+    const savedPosts = getAllSavedPostsFromLocalstorage();
     // render saved posts to UI
-    renderSavedPosts(savedPosts, true);
+    const mappedPosts = savedPosts.map(post => ({
+        ...post, 
+        title: `✔️ ${post.title}`
+    }));
+    renderSavedPosts(mappedPosts);
 }
 
+
+function deleteFromLocalstorage(liElement) {
+    const id = liElement.dataset.id;
+    const savedPosts = getAllSavedPostsFromLocalstorage();
+    const filteredPosts = savedPosts.filter(savedPost => savedPost.id !== id);
+    localStorage.setItem("mySavedPosts", JSON.stringify(filteredPosts));
+    liElement.remove();
+}
+
+function getAllSavedPostsFromLocalstorage() {
+    return JSON.parse(localStorage.getItem('mySavedPosts')) || [];
+}
+
+function changeButtonText(isEditMode) {
+    const text = isEditMode === true ? 'Edit Post' : 'Add Post';
+    document.getElementById('add-post-button').innerText = text;
+}
 
 export const showOrHideElement = (element, show = false, innerText = 'In Progress') => {
     if(show) {

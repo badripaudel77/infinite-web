@@ -12,17 +12,20 @@ document.addEventListener('DOMContentLoaded', fetchAndRenderPosts);
 const loaderElement = document.getElementById('loader');
 
 document.getElementById('add-post-button').addEventListener('click', submitPost);
+
+window.addEventListener('storage', retrieveAndRenderSavedPosts);
+
 /**
  * This will make HTTP call to our given endpoint, and fetch the data from server,
  * Map each data, modify if required and finally render to the UI
  */
 async function fetchAndRenderPosts(event) { 
     //console.log('event ', event);
+    retrieveAndRenderSavedPosts();
     showOrHideElement(loaderElement, true, 'Fetching Posts From Server');
     const posts = await fetchPosts(6);
     showOrHideElement(loaderElement, false, 'Fetching Posts From Server');
     renderPosts(posts);
-    retrieveAndRenderSavedPosts();
 }
 
 async function fetchPosts(postsLimit = 5) {
@@ -58,8 +61,16 @@ async function submitPost () {
     const postToAdd = {
         title: postTitle
     }
-    document.getElementById('input-error').style.display = 'none';
-    await addPost(postToAdd);
+        
+    // isEditMode 
+    if(isEditMode) {
+        // TODO: Implement
+        await updatePost(); 
+    }
+    else {
+        document.getElementById('input-error').style.display = 'none';
+        await addPost(postToAdd);
+    }
 }
 
 async function addPost(postToAdd) {

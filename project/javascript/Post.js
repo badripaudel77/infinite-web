@@ -12,3 +12,16 @@ export class Post {
         return this.postTitle;
     }
 }
+
+// Equivalent ways
+
+// Object literal
+// const post1 = {
+
+// }
+
+// function constructor
+// export function Post2(id, title) {
+//     this.id = id;
+//     this.title = title;
+// }
