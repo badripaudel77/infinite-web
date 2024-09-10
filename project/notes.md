@@ -55,15 +55,22 @@ ________________________________________________________________________________
 
 ### Day 6
 - Complete Remove Saved Post From UI
-- Map operator to manipulate array items (saved posts in our project)
+- Map operator to manipulate array items (saved posts in our project), mapping over object array and modify     individual object.
 - Storage Event Listener
 - Start Updating Post (Prepopulate, dynamic text change for the button).
 
 ### Day 7
-- TBD
+- Fix some glitches (code refactor)
+- Work on HTTP : PUT request
+- Scenario on using same method / code conditionally
+- Update particular element inside the HTML Element (eg: p inside of li)
+- Update object using Object.assign(...)
+- Update same variable from the different file (Understanding)
+- UI update and resetting values after successful operation
 
-### Day 8: 
-- TBD
+### Day 8
+
+TBD:
 - Github Hook (How to modify and display our custom message)
 
 ### URL 

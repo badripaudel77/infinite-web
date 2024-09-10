@@ -55,7 +55,7 @@ export function createElement(post, isLocal = false) {
             }
         }
         // Delete From Local storage
-        if(isLocal) {
+        if(isLocal && target?.className === 'delete-post-btn') {
             deleteFromLocalstorage(li);
         }
     }
@@ -76,7 +76,8 @@ function editPost(element) {
     const postId = element.dataset.id;
     const postTitle = element.innerText;
     isEditMode = true;
-    console.log(postTitle, postId)
+    // console.log(postTitle, postId)
+    document.getElementById('post-id').value = postId;
     document.getElementById('post-input').value = postTitle;
     changeButtonText(isEditMode);
 }
@@ -157,5 +158,7 @@ export const showOrHideElement = (element, show = false, innerText = 'In Progres
 
 export const resetValues = () => {
     document.getElementById('post-input').value = '';
+    changeButtonText(false);
+    document.getElementById('post-id').value = null;
 }
 

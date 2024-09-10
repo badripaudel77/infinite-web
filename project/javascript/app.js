@@ -5,7 +5,8 @@
 "use strict";
 
 import {baseAPIURL, createElement, renderPosts, 
-    showOrHideElement, resetValues, retrieveAndRenderSavedPosts } from './util.js';
+    showOrHideElement, resetValues, retrieveAndRenderSavedPosts, 
+    isEditMode } from './util.js';
 
 document.addEventListener('DOMContentLoaded', fetchAndRenderPosts);
 
@@ -61,14 +62,14 @@ async function submitPost () {
     const postToAdd = {
         title: postTitle
     }
-        
-    // isEditMode 
+    document.getElementById('input-error').style.display = 'none';   
     if(isEditMode) {
-        // TODO: Implement
-        await updatePost(); 
+        const postIdToUpdate = document.getElementById('post-id').value;
+        //postToAdd.postId = postIdToUpdate;
+        const postToUpdate = Object.assign(postToAdd, { postId: postIdToUpdate});
+        await updatePost(postToUpdate); 
     }
     else {
-        document.getElementById('input-error').style.display = 'none';
         await addPost(postToAdd);
     }
 }
@@ -91,4 +92,24 @@ async function addPost(postToAdd) {
       postsSection.prepend(addedelement);
       showOrHideElement(loaderElement, false);
       resetValues();
+}
+
+async function updatePost(postToUpdate) {
+    showOrHideElement(loaderElement, true, 'Updating Post');
+    const response = await fetch(`${baseAPIURL}/${postToUpdate.postId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postToUpdate)
+     }  
+    );
+    const updatedPost = await response.json();
+    if(updatedPost) {
+        const element = document.querySelector(`[data-id="${postToUpdate.postId}"]`);
+        // element.innerHTML = updatedPost.title; // Not allowed as it resets all content inside of it
+        element.querySelector('p').innerText = updatedPost.title;
+    }
+    showOrHideElement(loaderElement, false);
+    resetValues();
 }
