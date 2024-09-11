@@ -8,24 +8,25 @@
 </head>
 <body>
     <div class="container">
-        <form class="login" name="login-form" id="login-form">
+        <form class="login" name="login-form" id="login-form" novalidate autocomplete="off">
             <div class="avatar-container">
                 <img src="../assets/post_image.jpg" alt="Login Profile">
             </div>
             <div class="input-container">
                 <div class="row">
                     <label for="user-email"><b>Username</b></label>
-                    <input type="email" name="user-email" id="user-email" placeholder="Enter your username/email">
+                    <input type="email"  required id="user-email" placeholder="Enter your username/email">
                 </div>
                 <div class="row">
                     <label for="user-password"><b>Password</b> </label>
                     <input type="password" name="user-password" id="user-password" placeholder="Enter your password">
                 </div>
                 <div class="row">
-                    <button type="submit">Login</button>
+                    <button type="button" onclick="onLogin()">Login</button>
                 </div>
             </div>
         </form>
     </div>
+    <script src="/project/login/login.js" defer></script>
 </body>
 </html>
