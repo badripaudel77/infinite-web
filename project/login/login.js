@@ -1,11 +1,18 @@
+(function() {
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    if(userdata !== null && userdata['username'] && userdata.isLoggedIn) {
+        location.href = '/project/';
+    }
+})();
+
 const onLogin = () => {
     const username = document.getElementById('user-email').value;
     const password = document.getElementById('user-password').value;
-
+    // Validation on frontend
     const p = isCredsValid(username, password);
     p.then((data) => {
         if(data) {
-            // TODO: save to local storage
+            localStorage.setItem('userdata', JSON.stringify({username: username, isLoggedIn: true}));
             location.href = '/project';
         }
         else {

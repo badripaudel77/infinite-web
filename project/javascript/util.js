@@ -146,6 +146,13 @@ function changeButtonText(isEditMode) {
     document.getElementById('add-post-button').innerText = text;
 }
 
+export function checkIfUserIsLoggedInAndRedirect() {
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    if(userdata === null || !userdata['username'] || !userdata.isLoggedIn) {
+        location.href = '/project/login/login.html';
+    }
+}
+
 export const showOrHideElement = (element, show = false, innerText = 'In Progress') => {
     if(show) {
         element.style.display = 'block';

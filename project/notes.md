@@ -69,11 +69,25 @@ ________________________________________________________________________________
 - UI update and resetting values after successful operation
 
 ### Day 8
+- Login Form Design
+- Login Functionality using JS and redirection
+- Promise(resolve, reject)
+- Consuming Promise
+- Class work (To save user info to localstorage if login is successful)
+
+
+### Day 9
+- Complete user re-direction on login/logout
+  Class Work:
+  ___________
+
+        - Validate User Login Form on our existing "post manager application", try to meet the following criteria whenever possible:
+        - You must create a re-usable function with minimal duplication
+        - Feel free to use the HTML structure (element for displaying error message / login loader) of your choice but make sure you validate correctly. 
+        - Disallow multiple submission if no-response has been received from the server while doing login to the app
+        - To display the error messages/warnings/ login progresses, you MUST use the same function and your function should be able to handle all scenarios less duplication.
+        - Make function as less coupled as possible.
+        - Use proper selector (you may vary type of selectors as much as possible) while referencing on DOM
 
 TBD:
 - Github Hook (How to modify and display our custom message)
-
-### URL 
-
-### Retrieve element by data-id={someID}
-const updatedElement = document.querySelector(`[data-id="${postId}"]`);

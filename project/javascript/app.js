@@ -6,7 +6,7 @@
 
 import {baseAPIURL, createElement, renderPosts, 
     showOrHideElement, resetValues, retrieveAndRenderSavedPosts, 
-    isEditMode } from './util.js';
+    isEditMode, checkIfUserIsLoggedInAndRedirect } from './util.js';
 
 document.addEventListener('DOMContentLoaded', fetchAndRenderPosts);
 
@@ -22,6 +22,7 @@ window.addEventListener('storage', retrieveAndRenderSavedPosts);
  */
 async function fetchAndRenderPosts(event) { 
     //console.log('event ', event);
+    checkIfUserIsLoggedInAndRedirect();
     retrieveAndRenderSavedPosts();
     showOrHideElement(loaderElement, true, 'Fetching Posts From Server');
     const posts = await fetchPosts(6);
