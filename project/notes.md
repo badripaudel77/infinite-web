@@ -75,7 +75,6 @@ ________________________________________________________________________________
 - Consuming Promise
 - Class work (To save user info to localstorage if login is successful)
 
-
 ### Day 9
 - Complete user re-direction on login/logout
   Class Work:
@@ -89,5 +88,12 @@ ________________________________________________________________________________
         - Make function as less coupled as possible.
         - Use proper selector (you may vary type of selectors as much as possible) while referencing on DOM
 
-TBD:
-- Github Hook (How to modify and display our custom message)
+### Day 10
+- Implement bootstrap 5 navbar
+- Implement logout functionality
+- Complete the classwork (solution to the work of Day 9)
+- IIFE (Immediately Invoked Function expression)
+- Implement bootstrap 5 navbar
+- Implement logout functionality as well as display logged in username on the header section. 
+- Nullish coalescing operator (?? operator)
+- Basic UI refactor

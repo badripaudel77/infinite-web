@@ -17,13 +17,15 @@
                 <div class="row">
                     <label for="user-email"><b>Username</b></label>
                     <input type="email"  required id="user-email" placeholder="Enter your username/email">
+                    <span id="invalid-username"></span>
                 </div>
                 <div class="row">
                     <label for="user-password"><b>Password</b> </label>
                     <input type="password" name="user-password" id="user-password" placeholder="Enter your password">
+                    <span id="invalid-password"></span>
                 </div>
                 <div class="row">
-                    <button type="button" onclick="onLogin()">Login</button>
+                    <button type="button" onclick="onLogin()" id="login-btn">Login</button>
                 </div>
             </div>
         </form>

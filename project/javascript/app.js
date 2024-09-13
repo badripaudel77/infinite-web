@@ -114,3 +114,8 @@ async function updatePost(postToUpdate) {
     showOrHideElement(loaderElement, false);
     resetValues();
 }
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('userdata');
+    location.href = 'login/login.html';
+});
