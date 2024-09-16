@@ -106,7 +106,7 @@ On our existing "Posts Manager" Project, implement following scenarios:
 
 - When clicked on the that icon(Note: Only add ICON to the regular posts and not on the saved post item), make an API call to out server to fetch the details of the item (HINT: body of the JSON field).
 
-- Show some loading or indicator until the response is back from the server (This should expand the section where content will eventually be placed). When response arrives from the server, dispaly the body (remember, as of now, we're only using title to display) content on a some view (HTML element). 
+- Show some loading or indicator until the response is back from the server (This should expand the section where content will eventually be placed). When response arrives from the server, display the body (remember, as of now, we're only using title to display) content on a some view (HTML element). 
 
 - When you render the content, the ICON should change to some collapse Indicator Icon (eg: ➖ ) and clicking on it should hide the area where content was rendered.
 
