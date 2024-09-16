@@ -97,3 +97,19 @@ ________________________________________________________________________________
 - Implement logout functionality as well as display logged in username on the header section. 
 - Nullish coalescing operator (?? operator)
 - Basic UI refactor
+
+### Day 11
+This will be your "Main Assignment" for Web Programming (Frot End Only -> JS/CSS/HTML):
+
+On our existing "Posts Manager" Project, implement following scenarios:
+- For Each Post Received From the backend server, attach an Icon (use some library like fontawesome or your own custom Icon, eg: ➕ icon) and attach an event listener.
+
+- When clicked on the that icon(Note: Only add ICON to the regular posts and not on the saved post item), make an API call to out server to fetch the details of the item (HINT: body of the JSON field).
+
+- Show some loading or indicator until the response is back from the server (This should expand the section where content will eventually be placed). When response arrives from the server, dispaly the body (remember, as of now, we're only using title to display) content on a some view (HTML element). 
+
+- When you render the content, the ICON should change to some collapse Indicator Icon (eg: ➖ ) and it should hide the area where content was rendered. 
+
+- When expanding multiple time, make sure you shouldn't make multiple API calls if data has been already fetched until and unless it is a page refresh. Manage the state of data as mentioned in this point. 
+
+- Try to implement relevant scenario if you choose to implement in your own way, it should be justifiable. Handle other cases during implementation based on needs.

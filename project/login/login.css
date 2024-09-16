@@ -52,3 +52,15 @@
 button:hover {
     opacity: 0.8;
 }
+
+.error {
+    margin: 5px;
+    text-align: center;
+    color: red;
+}
+
+.btn-disabled {
+    background-color: grey !important;
+    color: white;
+    cursor:none !important;
+}

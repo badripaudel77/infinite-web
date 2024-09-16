@@ -45,13 +45,17 @@
             <div id="input-error" style="display: none;">
                 <span>________________ Enter post title ________________</span>
             </div>
+            <br>
             <div id="loader" style="display: none;">Loading ...</div>
-            
+            <div class="alert alert-warning" role="alert" id="no-regular-posts" 
+                 style="display: none;">You don't have any posts.</div>
             <ul id="posts-list"></ul>
         </div>
         <div class="saved-posts-container">
             <h3>My Saved Posts</h3>
             <hr>
+            <div class="alert alert-warning" role="alert" id="no-saved-posts"
+                 style="display: none;">You don't have any saved posts.</div>
             <ul id="saved-posts"></ul>
         </div>
       </div>

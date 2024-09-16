@@ -48,8 +48,8 @@ export function createElement(post, isLocal = false) {
             }
             if(target?.className === 'mark-post-btn') {
                     markPostAsRead(li);
+                    renderOrHideInfo('saved-posts', 'no-saved-posts');
             }
-        
             if(target?.className === 'edit-post-btn') {
                 editPost(li);
             }
@@ -57,6 +57,7 @@ export function createElement(post, isLocal = false) {
         // Delete From Local storage
         if(isLocal && target?.className === 'delete-post-btn') {
             deleteFromLocalstorage(li);
+            renderOrHideInfo('saved-posts', 'no-saved-posts');
         }
     }
     );
@@ -96,6 +97,7 @@ async function deletePost(element) {
         element.remove();
         showOrHideElement(document.getElementById('loader'), false, 'Deleting in progress');
     }
+    renderOrHideInfo('posts-list', 'no-regular-posts');
 }
 
 function markPostAsRead(element) {
@@ -126,6 +128,7 @@ export function retrieveAndRenderSavedPosts() {
         title: `✔️ ${post.title}`
     }));
     renderSavedPosts(mappedPosts);
+    renderOrHideInfo('saved-posts', 'no-saved-posts');
 }
 
 
@@ -160,6 +163,16 @@ export const showOrHideElement = (element, show = false, innerText = 'In Progres
     }
     else {
         element.style.display = 'none';
+    }
+}
+
+export function renderOrHideInfo(parentElementId, idOfElement) {
+    const parentElement = document.getElementById(`${parentElementId}`);
+    if(parentElement.childNodes.length > 0) {
+        document.getElementById(`${idOfElement}`).style.display = 'none';
+    }
+    else {
+        document.getElementById(`${idOfElement}`).style.display = 'block';
     }
 }
 
