@@ -99,7 +99,7 @@ ________________________________________________________________________________
 - Basic UI refactor
 
 ### Day 11
-This will be your "Main Assignment" for Web Programming (Frot End Only -> JS/CSS/HTML):
+This will be your "Main Assignment" for Web Programming (Front End Only -> JS/CSS/HTML):
 
 On our existing "Posts Manager" Project, implement following scenarios:
 - For Each Post Received From the backend server, attach an Icon (use some library like fontawesome or your own custom Icon, eg: ➕ icon) and attach an event listener.
