@@ -127,3 +127,16 @@ button:hover {
 .edit-post-btn:hover  {
     background-color: rgb(110, 72, 33);
 }
+
+/* Add more logic to make it stylish. */
+@media (max-width: 600px) {
+    body {
+        background-color: red;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

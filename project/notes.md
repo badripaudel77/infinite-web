@@ -113,3 +113,19 @@ On our existing "Posts Manager" Project, implement following scenarios:
 - When expanding multiple times, make sure you shouldn't make multiple API calls if data has been already fetched until and unless it is a page refresh. Manage the state of data as mentioned in this point. 
 
 - Try to implement relevant scenario if you choose to implement in your own way, it should be justifiable. Handle other cases during implementation based on needs.
+
+### Day 12
+- Discussion
+- XPATH of the elements on web
+- Media Queries
+- SASS/LESS
+- this/super keywords
+- Minificatin/Compression
+- XSS/CSRF, DoS, DDoS
+
+### Day 13
+- Set Up NodeJS project
+- Install Typescript and complete the setup
+- Install Dependencies (express, nodemon, types for express and node)
+- Prepare the project structure
+- this keyword in different contexts.
