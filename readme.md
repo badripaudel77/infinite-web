@@ -1,3 +1,8 @@
+## Demo
+For DEMO, refer to the following link which contains different screenshots of implemented scenarios of application.
+- https://github.com/badripaudel77/infinite-web/tree/main/demo
+
+
 # Reference sites
 1. https://developer.mozilla.org   (Official documentation)
         - https://developer.mozilla.org/en-US/docs/Web/HTML (HTML)
@@ -8,9 +13,6 @@
 3. https://www.javascripttutorial.net/
 4. https://javascript.info/
 __________________________________________________________________________________________________________________________________________________________________________________________
-
-FOR DEMO, refer to the following link which contains different screenshots of implemented scenarios of application.
-- https://github.com/badripaudel77/infinite-web/tree/main/demo
 
 ### Day 1: 
 - Including External Stylesheet, Internal and Inline stylesheet
