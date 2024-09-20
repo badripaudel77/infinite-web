@@ -9,6 +9,9 @@
 4. https://javascript.info/
 __________________________________________________________________________________________________________________________________________________________________________________________
 
+FOR DEMO, refer to the following link which contains different screenshots of implemented scenarios of application.
+- https://github.com/badripaudel77/infinite-web/tree/main/demo
+
 ### Day 1: 
 - Including External Stylesheet, Internal and Inline stylesheet
 - Import and Export
