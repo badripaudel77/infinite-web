@@ -2,6 +2,9 @@ import { Post } from "../models/Post";
 
 import { Request, Response } from "express";
 
+import { getByKey } from "../utils/redisUtils";
+import redisClient from "../config/redisConfig";
+
 let posts:Post[] = [
     {
         id: 1,
@@ -34,13 +37,25 @@ export const getPosts = (req: Request, res: Response): Response => {
     return res.status(200).json(posts);
 }
 
-export const getSinglePost = (req:Request, res:Response): Response |undefined => {
+export const getSinglePost = async (req:Request, res:Response): Promise<Response<any, Record<string, any>> | undefined> => {
     const id:number = parseInt(req.params.postId);
-    const post = posts.find(post => post.id === id);
-    if(post) {
-        return res.status(200).json({post});
+    const redisPost = await getByKey(redisClient, `postID_${id}`);
+
+    if(redisPost) {
+        console.log(`Entry with ID postID_${id} found in the cache, so returning from it.`, JSON.parse(redisPost));
+        const parsedPost = JSON.parse(redisPost);
+        return res.status(200).json({parsedPost});
     }
-    return res.status(404).json({message: `Post with ID: ${id} not found.`});
+    if(!redisPost) {
+        console.log(`Post with ID : postID_${id} not found in the cache, so fetching from the server.`);
+        const post = posts.find(post => post.id === id);
+        if(post) {
+            console.log(`Adding post with ID : postID_${id} to the cache.`, post.body);
+            redisClient.set(`postID_${id}`, JSON.stringify(post));
+            return res.status(200).json({post});
+        }
+        res.status(404).json({message: `Post with ID: postID_${id} not found.`});
+    }
 }
 
 export const addPost = (req: Request, res: Response): Response | null => {
