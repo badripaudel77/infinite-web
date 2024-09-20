@@ -7,8 +7,7 @@
 2. https://www.w3schools.com/Js/ (Good for individual HTML, CSS, JS concepts)
 3. https://www.javascripttutorial.net/
 4. https://javascript.info/
-
-________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+__________________________________________________________________________________________________________________________________________________________________________________________
 
 ### Day 1: 
 - Including External Stylesheet, Internal and Inline stylesheet
@@ -39,7 +38,7 @@ ________________________________________________________________________________
 - HTTP : DELETE request
 - Attaching event listeners to element created dynamically.
 - Remove element from DOM (.remove() method)
-- .closest() 
+- .closest() function
 
 ### Day 4
 - Localstorage
@@ -93,7 +92,6 @@ ________________________________________________________________________________
 - Implement logout functionality
 - Complete the classwork (solution to the work of Day 9)
 - IIFE (Immediately Invoked Function expression)
-- Implement bootstrap 5 navbar
 - Implement logout functionality as well as display logged in username on the header section. 
 - Nullish coalescing operator (?? operator)
 - Basic UI refactor
