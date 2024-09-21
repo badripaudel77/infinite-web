@@ -2,17 +2,6 @@
 For DEMO, refer to the following link which contains different screenshots of implemented scenarios of application.
 - https://github.com/badripaudel77/infinite-web/tree/main/demo
 
-
-# Reference sites
-1. https://developer.mozilla.org   (Official documentation)
-        - https://developer.mozilla.org/en-US/docs/Web/HTML (HTML)
-        - https://developer.mozilla.org/en-US/docs/Web/CSS
-        - https://developer.mozilla.org/en-US/docs/Web/JavaScript (Javascript)
-
-2. https://www.w3schools.com/Js/ (Good for individual HTML, CSS, JS concepts)
-3. https://www.javascripttutorial.net/
-4. https://javascript.info/
-__________________________________________________________________________________________________________________________________________________________________________________________
 ##### Instructions: 
 - To run backend, need to have NodeJS and NPM installed(Built with NodeJS version v20.11.1), redis server installed and up and running.
 - Install and make sure redis-server is running.
@@ -149,3 +138,14 @@ On our existing "Posts Manager" Project, implement following scenarios:
 
 ### Day 15
 - Assignment observations and feedfacks / recommendation.
+
+__________________________________________________________________________________________________________________________________________________________________________________________
+# Reference sites
+1. https://developer.mozilla.org   (Official documentation)
+        - https://developer.mozilla.org/en-US/docs/Web/HTML (HTML)
+        - https://developer.mozilla.org/en-US/docs/Web/CSS
+        - https://developer.mozilla.org/en-US/docs/Web/JavaScript (Javascript)
+
+2. https://www.w3schools.com/Js/ (Good for individual HTML, CSS, JS concepts)
+3. https://www.javascripttutorial.net/
+4. https://javascript.info/
