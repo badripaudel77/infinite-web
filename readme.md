@@ -149,3 +149,4 @@ ________________________________________________________________________________
 2. https://www.w3schools.com/Js/ (Good for individual HTML, CSS, JS concepts)
 3. https://www.javascripttutorial.net/
 4. https://javascript.info/
+5. NodeJS and Redis: https://redis.io/docs/latest/develop/connect/clients/nodejs/
