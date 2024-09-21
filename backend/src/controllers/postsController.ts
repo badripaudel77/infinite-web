@@ -2,7 +2,7 @@ import { Post } from "../models/Post";
 
 import { Request, Response } from "express";
 
-import { getByKey } from "../utils/redisUtils";
+import { getByKey, parseStringToObject, setValueByKeyInCache } from "../utils/redisUtils";
 import redisClient from "../config/redisConfig";
 
 let posts:Post[] = [
@@ -43,15 +43,14 @@ export const getSinglePost = async (req:Request, res:Response): Promise<Response
 
     if(redisPost) {
         console.log(`Entry with ID postID_${id} found in the cache, so returning from it.`, JSON.parse(redisPost));
-        const parsedPost = JSON.parse(redisPost);
+        const parsedPost = parseStringToObject(redisPost);
         return res.status(200).json({parsedPost});
     }
     if(!redisPost) {
         console.log(`Post with ID : postID_${id} not found in the cache, so fetching from the server.`);
         const post = posts.find(post => post.id === id);
         if(post) {
-            console.log(`Adding post with ID : postID_${id} to the cache.`, post.body);
-            redisClient.set(`postID_${id}`, JSON.stringify(post));
+            setValueByKeyInCache(redisClient, id, post);
             return res.status(200).json({post});
         }
         res.status(404).json({message: `Post with ID: postID_${id} not found.`});
