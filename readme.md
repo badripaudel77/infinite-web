@@ -13,6 +13,14 @@ For DEMO, refer to the following link which contains different screenshots of im
 3. https://www.javascripttutorial.net/
 4. https://javascript.info/
 __________________________________________________________________________________________________________________________________________________________________________________________
+##### Instructions: 
+- To run backend, need to have NodeJS and NPM installed(Built with NodeJS version v20.11.1), redis server installed and up and running.
+- Install and make sure redis-server is running.
+- After cloing project, 
+- ```bash cd backend```
+- ```bash npm install```
+- ```bash npm run dev```
+This should run backend server on specified PORT 3000.
 
 ### Day 1: 
 - Including External Stylesheet, Internal and Inline stylesheet
