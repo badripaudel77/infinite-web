@@ -128,6 +128,21 @@ button:hover {
     background-color: rgb(110, 72, 33);
 }
 
+.show-expand {
+    color: blueviolet;
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+    max-width: 400px;
+    text-align: left;
+}
+
+.hide {
+    display: none;
+}
+
 /* Add more logic to make it stylish and complete. Leaving styles are they're (Not mobile responsive) */
 @media (max-width: 600px) {
     body {

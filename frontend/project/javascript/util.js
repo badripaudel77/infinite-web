@@ -8,6 +8,8 @@ import { Post } from './Post.js';
 export const baseAPIURL = 'https://jsonplaceholder.typicode.com/posts';
 export let isEditMode = false;
 
+const postsMap = new Map();
+
 export const renderPosts = (posts) => {    
     const postsSection = document.getElementById('posts-list');
     posts.forEach(post => {
@@ -24,11 +26,18 @@ export function createElement(post, isLocal = false) {
     // li.innerText = post.title;
     if(!isLocal) {
         li.innerHTML = `
-        <p style="max-width: 400px;">${post.title}</p>
-        <div class="button-group">
+        <div style='display:flex;>
+            <div style='display:flex;'>
+                <i style="font-size:25px; margin-right:5px;" class="fa fa-plus-circle show-expand" title='fetch details'></i>
+                <p style="max-width: 300px; text-align:left;">${post.title}</p>
+            </div>  
+            <i class="fa fa-spinner fa-spin spinner" style="display:none;font-size:24px"></i>
+            <div class='post-desc hide'></div>  
+            <div class="button-group">
                 <button type="button"  class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
                 <button type="button"  class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
                 <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
+            </div>
         </div>
     `;
     }
@@ -53,6 +62,10 @@ export function createElement(post, isLocal = false) {
             if(target?.className === 'edit-post-btn') {
                 editPost(li);
             }
+            // expand or collapse clicked
+            if(e.target.className.includes('show-expand')) {
+                handleSinglePostDetails(li);
+            }
         }
         // Delete From Local storage
         if(isLocal && target?.className === 'delete-post-btn') {
@@ -62,6 +75,49 @@ export function createElement(post, isLocal = false) {
     }
     );
     return li;
+}
+
+async function handleSinglePostDetails(li) {
+   const icon = li.querySelector('.show-expand');
+   const postDesc = li.querySelector('.post-desc');
+   const spinner = li.querySelector('.spinner');
+
+   // console.log(icon, postDesc, li);
+   // Button is now expanded one, change it to collapse and make API call.
+   if(icon.classList.contains('fa-plus-circle')) {
+        showOrHideElement(spinner, true, '');
+        icon.classList.remove('fa-plus-circle');
+        icon.classList.add('fa-minus-circle');
+        postDesc.classList.remove('hide');
+        postDesc.classList.add('show');
+        const post = await getDetails(li.dataset.id);
+        showOrHideElement(spinner, false, '');
+        postDesc.innerText = post?.body ? post.body : 'NO DETAILS WAS FOUND';
+   }
+   // button is now collapsed, change it to expand and return (no api call) 
+   else {
+        icon.classList.remove('fa-minus-circle');
+        icon.classList.add('fa-plus-circle');
+        postDesc.classList.remove('show');
+        postDesc.classList.add('hide');
+   }
+}
+
+async function getDetails(id) {
+    const existingPost = postsMap.get(id);
+    if(existingPost) {
+        return existingPost;
+    }
+    // make API call and return
+    let response = await fetch(`${baseAPIURL}/${id}`,{
+        method: 'GET',
+        headers: {
+             'Content-Type': 'application/json'
+        }}
+    );
+    const post = await response.json();  
+    postsMap.set(id, post);  
+    return post;
 }
 
 export const renderSavedPosts = (posts) => {
