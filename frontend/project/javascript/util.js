@@ -27,24 +27,26 @@ export function createElement(post, isLocal = false) {
     if(!isLocal) {
         li.innerHTML = `
         <div style='display:flex;>
-            <div style='display:flex;'>
-                <i style="font-size:25px; margin-right:5px;" class="fa fa-plus-circle show-expand" title='fetch details'></i>
-                <p style="max-width: 300px; text-align:left;">${post.title}</p>
-            </div>  
-            <i class="fa fa-spinner fa-spin spinner" style="display:none;font-size:24px"></i>
-            <div class='post-desc hide'></div>  
-            <div class="button-group">
-                <button type="button"  class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
-                <button type="button"  class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
-                <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
+            <div style='display:flex;' class='li-item-content'>
+                <div style="display:flex;">
+                     <i style="font-size:25px; margin-right:5px;" class="fa fa-plus-circle show-expand" title='fetch details'></i>
+                     <p style="max-width: 300px; text-align:left;">${post.title}</p>
+                </div>    
+                <div class="button-group">
+                    <button type="button"  class="edit-post-btn" title='Edit this post'><i class="fa fa-edit"></i></button>
+                    <button type="button"  class="mark-post-btn" title='Mark as done'><i class="fa fa-check"></i></button>
+                    <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
+                </div>
             </div>
+            <i class="fa fa-spinner spinner" style="display:none;font-size:24px; text-align: center; color: orange;"></i>
+            <div class='post-desc hide'></div>
         </div>
     `;
     }
     if(isLocal) {
         li.innerHTML = `
-        <p style="max-width: 400px;">${post.title}</p>
-        <div class="button-group">
+        <div class="button-group local-btn">
+                <p style="max-width: 400px;">${post.title}</p>
                 <button type="button"  class="delete-post-btn" title='Delete post'><i class="fa fa-trash"></i></button>
         </div>
     `;
